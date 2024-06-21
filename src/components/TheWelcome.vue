@@ -1,38 +1,56 @@
 <script setup>
 import { W3SSdk } from '@circle-fin/w3s-pw-web-sdk'
 import { onMounted } from 'vue'
+import constants from "../constants"
 
-
-
-function fetchData() {
-    return fetch("http://localhost:3003/teams/50/challenges/initialize_wallet", {
-      method: "POST",
-      body: JSON.stringify({
-        team_uuid: "e10b2efc-dda1-49bf-bc0e-e1d625c4c71e"
-      }),
+const fetchAPI = async(method, path) => {
+  return (await fetch(`${constants.CARBONMARK_API_URL}${path}`, {
+      method,
       headers: {
-        "Content-Type": "application/json"
-      }
-    });
+  Authorization: `Bearer ${constants.SUPABASETOKEN}`
+}
+    })).json();
+}
+
+const  initializeWallets = async() => {
+    return fetchAPI("POST", "/teams/2/challenges/initialize_wallet");
 };
+const getWallets = async() => {
+  return fetchAPI("GET", "/teams/2/wallets");
+};
+
 onMounted(async () => {
-  const response = await fetchData();
-  const data = await response.json();
-  console.log(data);
-  const { userToken, encryptionKey, challengeId } = data;
+  // Fetch team
+  const team  = await fetchAPI("GET", "/teams/default");
+  if (!team.id) {
+    console.error("Cannot fetch team.")
+    return;
+  }
+  
+  // Get wallets
+  const wallets = await fetchAPI("GET", `/teams/${team.id}/wallets`);
+  if (wallets && !wallets.error) {
+    console.info("Wallet found", wallets)
+    return;
+  }
+  // Initialize wallet
+  const initializeWalletsResponse = await fetchAPI("POST", `/teams/${team.id}/challenges/initialize_wallet`);
+  if (!initializeWalletsResponse.challengeId) {
+    console.log("Cannot initialize wallet", initializeWalletsResponse)
+    return;
+  }
+  const { userToken, encryptionKey, challengeId } = initializeWalletsResponse;
   const sdk = new W3SSdk({})
-  sdk.setAppSettings({ appId : "8cc35178-2d5c-5d9e-a68d-a771fa72a883"  });
+  sdk.setAppSettings({ appId : constants.APPID  });
   sdk.setAuthentication({ userToken, encryptionKey })
-  window.setTimeout(() => {
-    sdk.execute(challengeId, (error, result) => {
-        if (error) {
-          console.error(`Erroe: ${error?.message ?? 'Error!'}`)
-          return
-        }
-        console.info(`Challenge: ${result?.type}, Status: ${result?.status}`)
-      })
-    },1000)
-})
+  sdk.execute(challengeId, (error, result) => {
+      if (error) {
+        console.error(`Erroe: ${error?.message ?? 'Error!'}`)
+        return
+      }
+      console.info(`Challenge: ${result?.type}, Status: ${result?.status}`)
+    })
+  })
 
 </script>
 
