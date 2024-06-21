@@ -4,5 +4,6 @@ const APPID = "63e3c320-9e01-58a5-a900-fc5a75284b30"
 
 export default {
     SUPABASETOKEN,
-    CARBONMARK_API_URL
+    CARBONMARK_API_URL,
+    APPID
 }
