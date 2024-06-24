@@ -1,7 +1,7 @@
 <script setup>
-import { W3SSdk } from '@circle-fin/w3s-pw-web-sdk'
-import { onMounted } from 'vue'
-import constants from "../constants"
+import { W3SSdk } from '@circle-fin/w3s-pw-web-sdk';
+import { onMounted } from 'vue';
+import constants from "../constants";
 
 const fetchAPI = async(method, path) => {
   return (await fetch(`${constants.CARBONMARK_API_URL}${path}`, {
@@ -14,7 +14,7 @@ const fetchAPI = async(method, path) => {
 
 const getTeam = async() => {
   const team = await fetchAPI("GET", "/teams/default");
-  if (!team?.id) {
+  if (!team?.uuid) {
     console.error("Cannot fetch team.")
     return [team, true];
   }
@@ -30,7 +30,7 @@ onMounted(async () => {
   if (abort) return;
 
   // Initialize wallet
-  const initializeWalletsResponse = await fetchAPI("POST", `/teams/${team.id}/challenges/initialize_wallet`);
+  const initializeWalletsResponse = await fetchAPI("POST", `/teams/${team.uuid}/challenges/initialize_wallet`);
   if (!initializeWalletsResponse.challengeId) {
     console.log("Cannot initialize wallet", initializeWalletsResponse)
     return;
@@ -54,7 +54,7 @@ onMounted(async () => {
 
 <template>
   <div>
-dsqd
+    Circle Test
 
   </div>
 </template>
