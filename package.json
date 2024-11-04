@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@circle-fin/w3s-pw-web-sdk": "^1.0.20",
+    "@supabase/supabase-js": "^2.45.4",
     "vue": "^3.4.29"
   },
   "devDependencies": {
