@@ -4,21 +4,11 @@ import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
 import Info from "./Info.vue";
-import ViewTransaction from "./ViewTransaction.vue";
-
-const fetchAPI = async (token, method, path) => {
-  return (
-    await fetch(`${constants.CARBONMARK_API_URL}${path}`, {
-      method,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-  ).json();
-};
+import GetTransaction from "./GetTransaction.vue";
+import { getAPI } from "@/utils";
 
 const getTeam = async (token) => {
-  const team = await fetchAPI(token, "GET", "/teams/default");
+  const team = await getAPI(token, "/teams/default");
   let hasWallet = false;
   if (!team?.uuid) {
     console.error("Cannot fetch team.");
@@ -47,31 +37,30 @@ const getToken = async () => {
 };
 
 const getWallet = async (token, team) => {
-  const wallet = await fetchAPI(token, "GET", `/wallets/${team.wallets[0]}`);
-  aWallet.value=wallet
+  const wallet = await getAPI(token, `/wallets/${team.wallets[0]}`);
+  aWallet.value = wallet
 };
 
-const aToken = ref("");
-const aWallet = ref("");
-const aTeam = ref("");
+const aToken = ref();
+const aWallet = ref();
+const aTeam = ref();
 
 onMounted(async () => {
   const token = await getToken();
-  
+
   aToken.value = token;
   // Fetch team
   const { team, hasWallet } = await getTeam(token);
   aTeam.value = team;
   if (hasWallet) {
     getWallet(token, team);
-    
+
     return;
   }
 
   // Initialize wallet
-  const initializeWalletsResponse = await fetchAPI(
+  const initializeWalletsResponse = await postAPI(
     token,
-    "POST",
     `/wallets?team=${team.uuid}`
   );
   if (!initializeWalletsResponse.challengeId) {
@@ -108,6 +97,6 @@ onMounted(async () => {
 <template>
   <div class="wrapper">
     <Info :team="aTeam" :wallet="aWallet" :token="aToken" />
-    <ViewTransaction :team="aTeam" :wallet="aWallet" :token="aToken" ></ViewTransaction>
-  </div>  
+    <GetTransaction :team="aTeam" :wallet="aWallet" :token="aToken" />
+  </div>
 </template>
