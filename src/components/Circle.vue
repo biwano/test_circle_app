@@ -3,7 +3,7 @@ import { W3SSdk } from "@circle-fin/w3s-pw-web-sdk";
 import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
-import Copiable from "./Copiable.vue";
+import Info from "./Info.vue";
 
 const fetchAPI = async (token, method, path) => {
   return (
@@ -50,13 +50,6 @@ const getToken = async () => {
 const getWallet = async (token, team) => {
   const wallet = await fetchAPI(token, "GET", `/wallets/${team.wallets[0]}`);
   aWallet.value=wallet
-  console.info("Wallet", wallet);
-  const balances = await fetchAPI(
-    token,
-    "GET",
-    `/wallets/${team.wallets[0]}/balances`
-  );
-  console.info("Balances", balances);
 };
 
 const aToken = ref("");
@@ -103,10 +96,6 @@ onMounted(async () => {
     }
   });
 });
-function copy(event) {
-  navigator.clipboard.writeText(aToken.value);
-}
-
 
 </script>
 <style>
@@ -121,12 +110,7 @@ function copy(event) {
 
 </style>
 <template>
-    <div class="wrapper">
-      <Copiable :label="'Token'" :value="aToken"></Copiable>
-      <Copiable :label="'Team UUID'" :value="aTeam.uuid"></Copiable>
-      <Copiable :label="'Team name'" :value="aTeam.name"></Copiable>
-      <Copiable :label="'Wallet UUID'" :value=" aWallet.uuid"></Copiable>
-      <Copiable :label="'Wallet address'" :value=" aWallet.address"></Copiable>
-  </div>
-  
+  <div>
+    <Info :team="aTeam" :wallet="aWallet" :token="aToken" />
+  </div>  
 </template>
