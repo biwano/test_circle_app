@@ -2,7 +2,6 @@
 import Copiable from "./Copiable.vue";
 
   const {token, team, wallet} = defineProps(["token", "team", "wallet"]);
-
 </script>
 <style scoped>
 

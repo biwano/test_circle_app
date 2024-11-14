@@ -23,7 +23,6 @@ const getTeam = async (token) => {
   if (!team?.uuid) {
     console.error("Cannot fetch team.");
   } else if (team?.wallets.length) {
-    console.info(`Wallet found: ${team.wallets}`);
     hasWallet = true;
   }
   return {

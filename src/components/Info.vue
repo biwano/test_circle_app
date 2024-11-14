@@ -2,7 +2,7 @@
 import { cutString } from "@/utils";
 import Copiable from "./Copiable.vue";
 
-const { token, team, wallet } = defineProps(["token", "team", "wallet"]);
+const props = defineProps(["token", "team", "wallet"]);
 
 </script>
 <style scoped>
