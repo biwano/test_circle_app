@@ -37,8 +37,10 @@
 }
 /* layout */
 :root {
-  --gap: 0.1rem;
-  --padding: 0.5rem;
+  --item-gap: 0.1rem;
+  --item-padding: 0.5rem;
+  --card-gap: 1rem;
+  --card-padding: 0.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -89,3 +91,4 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+

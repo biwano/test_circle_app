@@ -1,19 +1,23 @@
 <script setup>
-const {value} = defineProps(["label", "value"]);
+import { ref } from 'vue';
 
-function copy() {
+const {valueLabel, value} = defineProps(["label", "value", "valueLabel"]);
+const uiValueLabel = ref("")
+uiValueLabel.value = valueLabel ?? value;
+
+function onCopy() {
   navigator.clipboard.writeText(value);
 }
 
 </script>
-<style>
+<style scoped>
 .item {
   display: flex;
   gap: 1rem;
 }
 .item>div {
   flex: 1 1 0;
-  padding: var(--padding);
+  padding: var(--item-padding);
   display: flex;
   align-items: center;
 }
@@ -27,5 +31,5 @@ function copy() {
 }
 </style>
 <template>
-    <div class="item"><div>{{label}}</div><div v-on:click="copy">{{ value }}</div></div>
+    <div class="item"><div>{{label}}</div><div v-on:click="onCopy">{{ uiValueLabel }}</div></div>
 </template>

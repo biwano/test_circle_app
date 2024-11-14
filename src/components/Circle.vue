@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
 import Info from "./Info.vue";
+import ViewTransaction from "./ViewTransaction.vue";
 
 const fetchAPI = async (token, method, path) => {
   return (
@@ -31,7 +32,6 @@ const getTeam = async (token) => {
   };
 };
 const getToken = async () => {
-  let token;
   try {
     const supabase = createClient(
       constants.SUPABASE.URL,
@@ -96,21 +96,19 @@ onMounted(async () => {
     }
   });
 });
-
 </script>
-<style>
+
+<style scoped>
 .wrapper {
   display: flex;
   flex-direction: column;
-  word-wrap: break-word;
-  word-break: break-all;
-  gap: var(--gap);
-  overflow: none;
+  gap: var(--card-gap);
 }
-
 </style>
+
 <template>
-  <div>
+  <div class="wrapper">
     <Info :team="aTeam" :wallet="aWallet" :token="aToken" />
+    <ViewTransaction :team="aTeam" :wallet="aWallet" :token="aToken" ></ViewTransaction>
   </div>  
 </template>

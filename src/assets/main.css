@@ -12,16 +12,28 @@ main {
   margin: 0 auto;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.card {
+  padding: 1rem;
+  border: 1px solid;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  word-break: break-all;
+  gap: var(--item-gap);
+  overflow: none;
+}
+
+
+input {
+  height: 2rem;
+  padding: var(--item-padding);
+  width: 100%;
+}
+
+button {
+  height: 2rem;
+  padding: var(--item-padding);
 }
