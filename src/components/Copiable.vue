@@ -7,23 +7,20 @@ function copy() {
 
 </script>
 <style>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  word-break: break-all;
-  overflow: none;
-}
 .item {
   display: flex;
   gap: 1rem;
 }
 .item>div {
   flex: 1 1 0;
+  padding: var(--padding);
+  display: flex;
+  align-items: center;
 }
 .item>div:first-child {
   font-weight: bolder;
-  font-size: 15px;
+
+  background-color: var(--color-background-soft);
 }
 .item>div:nth-child(2) {
   flex: 2 1 0;

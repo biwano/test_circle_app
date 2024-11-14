@@ -113,15 +113,12 @@ function copy(event) {
 .wrapper {
   display: flex;
   flex-direction: column;
+  word-wrap: break-word;
+  word-break: break-all;
+  gap: var(--gap);
+  overflow: none;
 }
-.item {
-  display: flex;
-  gap: 1rem;
-}
-.item div:first-child {
-  font-weight: bolder;
-  font-size: 15px;
-}
+
 </style>
 <template>
     <div class="wrapper">

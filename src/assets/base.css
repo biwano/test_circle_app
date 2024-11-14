@@ -35,6 +35,11 @@
 
   --section-gap: 160px;
 }
+/* layout */
+:root {
+  --gap: 0.1rem;
+  --padding: 0.5rem;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
