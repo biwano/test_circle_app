@@ -1,7 +1,7 @@
 <script setup>
 import { getAPI } from "@/utils";
 import { ref } from "vue";
-import Response from "./Response.vue";
+import Response from "./Query/Response.vue";
 
 const { token, team, wallet } = defineProps(["token", "team", "wallet"]);
 const refId = ref();
@@ -22,7 +22,6 @@ pre {
 </style>
 <template>
   <div>
-    <h1>Fetch transaction</h1>
     <div class="column">
       <div class="row">
         <div>Transaction refId</div>

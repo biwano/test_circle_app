@@ -4,9 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
 import Info from "./Info.vue";
-import GetTransaction from "./GetTransaction.vue";
 import { getAPI } from "@/utils";
-import Query from "./Query.vue";
+import Query from "./Query/Query.vue";
 
 const getTeam = async (token) => {
   const team = await getAPI(token, "/teams/default");

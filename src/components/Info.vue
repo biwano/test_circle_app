@@ -3,9 +3,9 @@ import { cutString } from "@/utils";
 import Copiable from "./Copiable.vue";
 import { computed } from 'vue';
 
-const { wallet } = defineProps(["token", "team", "wallet"]);
+const { team } = defineProps(["token", "team", "wallet"]);
 
-const circleURL = computed(() => { return `https://console.circle.com/wallets/user/users/test-${wallet?.address}` });
+const circleURL = computed(() => { return `https://console.circle.com/wallets/user/users/test-${team?.uuid}` });
 
 </script>
 <style scoped></style>
