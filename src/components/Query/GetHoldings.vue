@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { getAPI } from "@/utils";
 import { useQuery } from "./useQuery";
 import QueryTemplate from "./QueryTemplate.vue";
-import { Wallet, Team } from "@/types";
+import type { Wallet, Team } from "@/types";
 
 const { token, wallet } = defineProps({
   token: String,

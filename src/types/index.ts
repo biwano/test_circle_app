@@ -1,4 +1,4 @@
-export interface Team {
+export type Team = {
   uuid: String;
   name: String;
 }

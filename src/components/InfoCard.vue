@@ -1,8 +1,8 @@
-<script setup>
+<script setup lang="ts">
 import { cutString } from "@/utils";
 import Copiable from "./CopiableComponent.vue";
 import { computed } from 'vue';
-import {Team, Wallet} from '@/types'
+import type {Team, Wallet} from '@/types'
 
 const { token, wallet, team } = defineProps({"token": String, "team": Team, "wallet": Wallet});
 

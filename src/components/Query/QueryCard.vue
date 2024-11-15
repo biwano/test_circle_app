@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
+import type { Wallet, Team } from "@/types";
 import { computed, ref, shallowRef } from "vue";
 import GetTransaction from "./GetTransaction.vue";
 import GetListings from "./GetListings.vue";
 import GetHoldings from "./GetHoldings.vue";
-import { Wallet, Team } from "@/types";
 
 const { token, team, wallet } = defineProps({
   token: String,
