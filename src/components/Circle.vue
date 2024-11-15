@@ -6,6 +6,7 @@ import constants from "../constants";
 import Info from "./Info.vue";
 import GetTransaction from "./GetTransaction.vue";
 import { getAPI } from "@/utils";
+import Query from "./Query.vue";
 
 const getTeam = async (token) => {
   const team = await getAPI(token, "/teams/default");
@@ -97,6 +98,6 @@ onMounted(async () => {
 <template>
   <div class="wrapper">
     <Info :team="aTeam" :wallet="aWallet" :token="aToken" />
-    <GetTransaction :team="aTeam" :wallet="aWallet" :token="aToken" />
+    <Query :team="aTeam" :wallet="aWallet" :token="aToken" />
   </div>
 </template>

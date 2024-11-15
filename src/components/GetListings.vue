@@ -8,8 +8,7 @@ const refId = ref();
 const response = ref();
 
 const onSubmit = async () => {
-  const transaction = await getAPI(token, `/wallets/${wallet.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`)
-
+  const transaction = await getAPI(token, `/listings?sellerWallet=${wallet.address}`)
   response.value = JSON.stringify(transaction[0], null, 2);
 }
 
@@ -22,12 +21,8 @@ pre {
 </style>
 <template>
   <div>
-    <h1>Fetch transaction</h1>
+    <h1>Fetch listings</h1>
     <div class="column">
-      <div class="row">
-        <div>Transaction refId</div>
-        <div><input v-model="refId" /></div>
-      </div>
       <div class="row">
         <button v-on:click="onSubmit">Submit</button>
       </div>
