@@ -1,6 +1,7 @@
 <script setup>
-import Response from "./Response.vue";
-defineProps(["response"]);
+import Response from "./ResponseComponent.vue";
+defineProps({ response: Object });
+defineEmits({ submit: String });
 </script>
 
 <template>
@@ -8,7 +9,9 @@ defineProps(["response"]);
     <div class="column">
       <slot />
       <div class="row">
-        <button v-on:click="$emit('submit')">Submit</button>
+        <button @click="$emit('submit')">
+          Submit
+        </button>
       </div>
       <Response :response="response" />
     </div>

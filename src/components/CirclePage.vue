@@ -3,9 +3,9 @@ import { W3SSdk } from "@circle-fin/w3s-pw-web-sdk";
 import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
-import Info from "./Info.vue";
-import { getAPI } from "@/utils";
-import Query from "./Query/Query.vue";
+import Info from "./InfoCard.vue";
+import { getAPI, postAPI } from "@/utils";
+import Query from "./Query/QueryCard.vue";
 
 const getTeam = async (token) => {
   const team = await getAPI(token, "/teams/default");
@@ -38,7 +38,7 @@ const getToken = async () => {
 
 const getWallet = async (token, team) => {
   const wallet = await getAPI(token, `/wallets/${team.wallets[0]}`);
-  aWallet.value = wallet
+  aWallet.value = wallet;
 };
 
 const aToken = ref();
@@ -86,17 +86,17 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--card-gap);
-}
-</style>
-
 <template>
-  <div class="wrapper">
-    <Info :team="aTeam" :wallet="aWallet" :token="aToken" />
-    <Query :team="aTeam" :wallet="aWallet" :token="aToken" />
+  <div class="column">
+    <Info
+      :team="aTeam"
+      :wallet="aWallet"
+      :token="aToken"
+    />
+    <Query
+      :team="aTeam"
+      :wallet="aWallet"
+      :token="aToken"
+    />
   </div>
 </template>

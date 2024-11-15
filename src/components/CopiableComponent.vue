@@ -1,7 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
-const { valueLabel, value } = defineProps(["label", "value", "valueLabel"]);
+const { valueLabel, value } = defineProps({"label": String, "value": String, "valueLabel": String});
 
 const uiValueLabel = computed(() => {
   return valueLabel ?? value;
@@ -16,6 +16,8 @@ function onCopy() {
 <template>
   <div class="row">
     <div>{{ label }}</div>
-    <div v-on:click="onCopy">{{ uiValueLabel }}</div>
+    <div @click="onCopy">
+      {{ uiValueLabel }}
+    </div>
   </div>
 </template>

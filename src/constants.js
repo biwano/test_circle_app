@@ -8,6 +8,6 @@ export default {
     EMAIL: "user2@example.com",
     PASSWORD: "password123"
   },
-  CARBONMARK_API_URL: "http://localhost:3003",
-  APPID: "63e3c320-9e01-58a5-a900-fc5a75284b30",
+  CARBONMARK_API_URL,
+  APPID,
 };

@@ -1,5 +1,5 @@
 <script setup>
-import Circle from './components/Circle.vue'
+import Circle from './components/CirclePage.vue'
 </script>
 
 <template>
