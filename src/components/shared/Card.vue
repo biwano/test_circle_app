@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import Icon from "./Icon.vue";
 import InteractiveText from "./InteractiveText.vue";
+import ItemColumn from "./ItemColumn.vue";
 
 defineProps<{ title: string }>();
 
@@ -11,41 +12,32 @@ const iconShape = computed(() => (hidden.value ? "eye-alt" : "eye"));
 
 <template>
   <div class="wrapper">
-    <div class="header">
-      <h2>{{ title }}</h2>
-      <InteractiveText
-        ><Icon :shape="iconShape" @click="hidden = !hidden"
-      /></InteractiveText>
-    </div>
-    <div :class="{ hidden }">
-      <slot />
-    </div>
+    <ItemColumn>
+      <div class="header">
+        <h2>{{ title }}</h2>
+        <InteractiveText
+          ><Icon :shape="iconShape" @click="hidden = !hidden"
+        /></InteractiveText>
+      </div>
+      <div :class="{ hidden }">
+        <slot />
+      </div>
+    </ItemColumn>
   </div>
 </template>
 
 <style scoped>
 .wrapper {
-  position: relative;
   padding: 1rem;
   border: 1px solid;
+  border-radius: var(--border-radius);
+  box-shadow: var(--surface-shadow);
+  background-color: var(--neutralsurface-background-color);
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.caret {
-  right: 0;
-  top: 0.25rem;
-  position: relative;
-  transition: 0.5s;
-  color: red;
-}
-.caret.opened {
-  transform: rotate(0deg) !important;
-}
-.caret.closed {
-  transform: rotate(90deg) !important;
 }
 .hidden {
   max-height: 0;

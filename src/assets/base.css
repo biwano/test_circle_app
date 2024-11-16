@@ -1,18 +1,26 @@
 :root {
   --w-surface: #fff;
   --w-surface-inactive: #eee;
+  --w-surface-inactive-shadow: #aaa;
   --w-surface-active: #eee;
   --w-surface-activable: #fdf;
   --w-surface-triggered: #fcf;
 
+  --w-line-activable: #505;
   --w-line-active: #505;
   --w-line-triggered: #f0f;
 
+  --w-shadow: 0.1rem 0.1rem 0.3rem var(--w-surface-inactive-shadow);
   --w-shadow-active: 0.1rem 0.1rem 0.3rem var(--w-line-active);
   --w-shadow-activable: 0.1rem 0.1rem 0.3rem var(--w-line-active);
 }
 /* semantic color variables for this project */
 :root {
+  --background-color: #101;
+
+  --surface-shadow: var(--w-shadow);
+
+  --neutralsurface-background-color: var(--w-surface);
   --inactivesurface-background-color: var(--w-surface-inactive);
 
   --interactivesurface-background-color: var(--w-surface-activable);
@@ -28,6 +36,9 @@
 
   --interactivetext-color: var(--w-line-active);
   --interactivetext-hover-color: var(--w-line-triggered);
+
+  --input-border: 0.1rem var(--w-line-activable) solid;
+  --input-hover-border: 0.1rem var(--w-line-triggered) solid;
 
   --item-gap: 0.5rem;
   --item-padding: 0.2rem 0.5rem 0.2rem 0.5rem;
@@ -48,7 +59,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--background-color);
   transition:
     color 0.5s,
     background-color 0.5s;

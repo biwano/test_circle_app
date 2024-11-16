@@ -11,7 +11,7 @@ const { valueLabel, value } = defineProps<{
   valueLabel?: string;
 }>();
 const slots = useSlots();
-const hasSlot = (name) => {
+const hasSlot = (name: string) => {
   return !!slots[name];
 };
 console.log(slots);

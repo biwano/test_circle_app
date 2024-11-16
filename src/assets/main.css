@@ -24,6 +24,20 @@ input {
   height: 2rem;
   padding: var(--item-padding);
   width: 100%;
-  border: 0.1rem var(--color-border) solid;
+  border: var(--input-border);
   border-radius: var(--border-radius);
+  transition: 0.5s;
+  outline: none;
+  box-shadow: var(--interactivesurface-shadow);
+}
+input:hover {
+  border: var(--input-hover-border);
+  box-shadow: var(--interactivesurface-hover-shadow);
+}
+input:focus {
+  box-shadow: var(--activesurface-hover-shadow);
+}
+
+h2 {
+  text-shadow: var(--surface-shadow);
 }

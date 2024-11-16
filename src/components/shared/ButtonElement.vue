@@ -25,6 +25,7 @@ button {
   background-color: var(--interactivesurface-background-color);
   box-shadow: var(--interactivesurface-shadow);
   color: var(--interactivesurface-text-color);
+  cursor: pointer;
 }
 
 button:hover {
