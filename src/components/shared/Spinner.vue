@@ -1,7 +1,3 @@
-<script setup lang="ts">
-defineProps<{ response?: string }>();
-</script>
-
 <template>
   <span class="loader"></span>
 </template>

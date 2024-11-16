@@ -2,7 +2,7 @@
 import type { UserContext } from "@/types/index";
 import { cutString } from "@/utils";
 import { computed } from "vue";
-import Copiable from "./CopiableComponent.vue";
+import Copiable from "./shared/CopiableComponent.vue";
 
 const props = defineProps<{
   ctx: UserContext;

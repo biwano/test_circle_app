@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ButtonElement from "@/components/shared/ButtonElement.vue";
 import type { UserContext } from "@/types";
 import { computed, ref, shallowRef } from "vue";
 import GetHoldings from "./GetHoldings.vue";
@@ -31,14 +32,15 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
   <div class="card">
     <div class="card-column">
       <div class="pills">
-        <button
+        <ButtonElement
           v-for="(query, index) in queries"
           :key="index"
-          :class="{ active: activeQueryIndex == index }"
+          :activable="true"
+          :active="activeQueryIndex == index"
           @click="activeQueryIndex = index"
         >
           {{ query.title }}
-        </button>
+        </ButtonElement>
       </div>
       <keep-alive
         ><component :is="activeQuery.component" :ctx="props.userContext"
@@ -52,9 +54,5 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
   display: flex;
   flex-direction: row;
   gap: var(--item-gap);
-}
-
-.active {
-  background-color: var(--color-background-active);
 }
 </style>
