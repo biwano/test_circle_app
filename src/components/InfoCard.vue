@@ -5,6 +5,7 @@ import { computed } from "vue";
 import Card from "./shared/Card.vue";
 import Copiable from "./shared/CopiableComponent.vue";
 import ItemColumn from "./shared/ItemColumn.vue";
+import Link from "./shared/Link.vue";
 
 const props = defineProps<{
   ctx: UserContext;
@@ -30,7 +31,9 @@ const circleURL = computed(() => {
         :label="'Circle URL'"
         :value="circleURL"
         :value-label="circleURL"
-      />
+      >
+        <Link :href="circleURL" target="_blank">{{ circleURL }}</Link></Copiable
+      >
     </ItemColumn>
   </Card>
 </template>

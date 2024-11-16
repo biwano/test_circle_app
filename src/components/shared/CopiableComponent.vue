@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import CopyIcon from "./icons/CopyIcon.vue";
+import { computed, useSlots } from "vue";
+import Icon from "./Icon.vue";
 import InteractiveText from "./InteractiveText.vue";
 import LabelValue from "./LabelValue.vue";
 import Spinner from "./Spinner.vue";
@@ -10,6 +10,11 @@ const { valueLabel, value } = defineProps<{
   value?: string;
   valueLabel?: string;
 }>();
+const slots = useSlots();
+const hasSlot = (name) => {
+  return !!slots[name];
+};
+console.log(slots);
 
 const uiValueLabel = computed(() => {
   return valueLabel ?? value;
@@ -23,9 +28,12 @@ function onCopy() {
 <template>
   <LabelValue>
     <div>{{ label }}</div>
-    <div v-if="uiValueLabel" @click="onCopy" class="value">
-      {{ uiValueLabel }}
-      <InteractiveText><CopyIcon class="active-text" /></InteractiveText>
+    <div v-if="uiValueLabel" class="value">
+      <slot />
+      <span v-if="!hasSlot('default')">{{ uiValueLabel }}</span>
+      <InteractiveText
+        ><Icon shape="copy" class="active-text" @click="onCopy"
+      /></InteractiveText>
     </div>
     <div v-else><Spinner /></div>
   </LabelValue>
