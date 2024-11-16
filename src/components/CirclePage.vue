@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { onMounted, ref } from "vue";
 import constants from "../constants";
 import Info from "./InfoCard.vue";
-import QueryCard from "./Query/QueryCard.vue";
+import QueryCard from "./query/QueryCard.vue";
 
 const getToken = async () => {
   try {

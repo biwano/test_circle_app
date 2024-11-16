@@ -1,11 +1,10 @@
 <script setup lang="ts">
-defineProps<{ response?: string }>()
+defineProps<{ response?: string }>();
 </script>
 
 <template>
   <div class="row">
     <pre v-if="response">{{ response }}</pre>
-    <pre v-else>No data</pre>
   </div>
 </template>
 

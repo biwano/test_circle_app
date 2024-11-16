@@ -40,7 +40,9 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
           {{ query.title }}
         </button>
       </div>
-      <component :is="activeQuery.component" :ctx="props.userContext" />
+      <keep-alive
+        ><component :is="activeQuery.component" :ctx="props.userContext"
+      /></keep-alive>
     </div>
   </div>
 </template>
