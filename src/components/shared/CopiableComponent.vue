@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import CopyIcon from "./CopyIcon.vue";
+import CopyIcon from "./icons/CopyIcon.vue";
 import InteractiveText from "./InteractiveText.vue";
 import LabelValue from "./LabelValue.vue";
 import Spinner from "./Spinner.vue";

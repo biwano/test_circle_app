@@ -2,7 +2,7 @@
 import ButtonElement from "@/components/shared/ButtonElement.vue";
 import ItemColumn from "@/components/shared/ItemColumn.vue";
 import Spinner from "@/components/shared/Spinner.vue";
-import Response from "./ResponseElement.vue";
+import JsonViewer from "../../shared/JsonViewer.vue";
 import type { UseQuery } from "./useQuery";
 
 defineProps<{ query: UseQuery<unknown> }>();
@@ -16,6 +16,6 @@ defineEmits<{ submit: void }>();
       <ButtonElement @click="$emit('submit')">Submit</ButtonElement>
     </div>
     <Spinner v-if="query.loading" />
-    <Response :response="query.response" />
+    <JsonViewer :data="query.response" />
   </ItemColumn>
 </template>

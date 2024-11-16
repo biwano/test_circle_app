@@ -1,5 +1,5 @@
 @import "./base.css";
-
+@import "./icons/index.css";
 #app {
   font-size: 10px;
 }

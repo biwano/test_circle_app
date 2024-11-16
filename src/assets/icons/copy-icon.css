@@ -1,8 +1,3 @@
-<template>
-  <span class="gg-copy"></span>
-</template>
-
-<style scoped>
 .gg-copy {
   box-sizing: border-box;
   position: relative;
@@ -43,4 +38,3 @@
     0 4px 0,
     0 8px 0;
 }
-</style>

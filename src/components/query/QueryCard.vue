@@ -32,7 +32,7 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
 </script>
 
 <template>
-  <Card title="">
+  <Card title="Queries">
     <CardColumn>
       <ItemRow>
         <ButtonElement
