@@ -1,11 +1,5 @@
-<script setup>
-import Circle from './components/CirclePage.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <main>
-    <Circle />
-  </main>
+  <RouterView />
 </template>
-
-

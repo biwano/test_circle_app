@@ -1,62 +1,67 @@
-<script setup>
-import { W3SSdk } from "@circle-fin/w3s-pw-web-sdk";
-import { createClient } from "@supabase/supabase-js";
-import { onMounted, ref } from "vue";
-import constants from "../constants";
-import Info from "./InfoCard.vue";
-import { getAPI, postAPI } from "@/utils";
-import Query from "./Query/QueryCard.vue";
+<script setup lang="ts">
+import { W3SSdk } from '@circle-fin/w3s-pw-web-sdk'
+import { createClient } from '@supabase/supabase-js'
+import { onMounted, ref } from 'vue'
+import constants from '../constants'
+import Info from './InfoCard.vue'
+import { getAPI, postAPI } from '@/utils'
+import Query from './Query/QueryCard.vue'
+import { UserContext } from '@/types'
 
 const getTeam = async (token) => {
-  const team = await getAPI(token, "/teams/default");
-  let hasWallet = false;
+  const team = await getAPI(token, '/teams/default')
+  let hasWallet = false
   if (!team?.uuid) {
-    console.error("Cannot fetch team.");
+    console.error('Cannot fetch team.')
   } else if (team?.wallets.length) {
-    hasWallet = true;
+    hasWallet = true
   }
   return {
     team,
     hasWallet,
-  };
-};
+  }
+}
 const getToken = async () => {
   try {
-    const supabase = createClient(
-      constants.SUPABASE.URL,
-      constants.SUPABASE.ANON_KEY
-    );
+    const supabase = createClient(constants.SUPABASE.URL, constants.SUPABASE.ANON_KEY)
     const response = await supabase.auth.signInWithPassword({
       email: constants.SUPABASE.EMAIL,
       password: constants.SUPABASE.PASSWORD,
-    });
-    return response.data.session.access_token;
+    })
+    return response.data.session?.access_token
   } catch (e) {
-    console.error(e);
+    console.error(e)
   }
-};
+}
 
-const getWallet = async (token, team) => {
-  const wallet = await getAPI(token, `/wallets/${team.wallets[0]}`);
-  aWallet.value = wallet;
-};
-
-const aToken = ref();
-const aWallet = ref();
-const aTeam = ref();
+const userContext = ref<UserContext>({
+  team: undefined,
+  wallet: undefined,
+  token: undefined,
+})
 
 onMounted(async () => {
-  const token = await getToken();
-
-  aToken.value = token;
-  // Fetch team
-  const { team, hasWallet } = await getTeam(token);
-  aTeam.value = team;
-  if (hasWallet) {
-    getWallet(token, team);
-
-    return;
+  const token = await getToken()
+  if (!token) return
+  userContext.value = {
+    ...userContext.value,
+    token,
   }
+
+  // Fetch team
+  const team = await getAPI(token, `/teams/default`)
+  userContext.value = {
+    ...userContext.value,
+    team,
+  }
+  if (team.wallets) {
+    const wallet = await getAPI(token, `/wallets/${team.wallets[0]}`)
+    userContext.value = {
+      ...userContext.value,
+      wallet,
+    }
+  }
+  /*
 
   // Initialize wallet
   const initializeWalletsResponse = await postAPI(
@@ -82,21 +87,12 @@ onMounted(async () => {
     if (hasWallet) {
       getWallet(token, team);
     }
-  });
-});
+  });*/
+})
 </script>
 
 <template>
   <div class="column">
-    <Info
-      :team="aTeam"
-      :wallet="aWallet"
-      :token="aToken"
-    />
-    <Query
-      :team="aTeam"
-      :wallet="aWallet"
-      :token="aToken"
-    />
+    <Info :userContext="userContext" />
   </div>
 </template>

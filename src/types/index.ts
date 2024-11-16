@@ -1,9 +1,16 @@
 export type Team = {
-  uuid: String;
-  name: String;
+  uuid: string
+  name: string
+  wallets: string[]
 }
 
 export interface Wallet {
-  address: String;
-  uuid: String;
+  address: string
+  uuid: string
+}
+
+export interface UserContext {
+  wallet: Wallet
+  team: Team
+  token: string
 }

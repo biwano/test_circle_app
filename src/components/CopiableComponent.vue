@@ -1,16 +1,19 @@
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed } from 'vue'
 
-const { valueLabel, value } = defineProps({"label": String, "value": String, "valueLabel": String});
+const { valueLabel, value } = defineProps<{
+  label: string
+  value?: string
+  valueLabel?: string
+}>()
 
 const uiValueLabel = computed(() => {
-  return valueLabel ?? value;
+  return valueLabel ?? value
 })
 
 function onCopy() {
-  navigator.clipboard.writeText(value);
+  if (value) navigator.clipboard.writeText(value)
 }
-
 </script>
 
 <template>
