@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import { getAPI } from "@/utils";
+import type { UserContext } from "@/types";
+import { getAPI, getQueryArgs } from "@/utils";
 import { ref } from "vue";
-import QueryTemplate from "./QueryTemplate.vue";
+import QueryTemplate from "./QueryWrapper.vue";
 import { useQuery } from "./useQuery";
-import type { Wallet, Team } from "@/types";
 
-const { token, wallet } = defineProps({
-  token: String,
-  team: Team,
-  wallet: Wallet,
-});
+const props = defineProps<{
+  ctx: UserContext;
+}>();
+
 const refId = ref();
 const { response, onSubmit } = useQuery(() =>
-  getAPI(token, `/wallets/${wallet.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`)
+  getAPI(
+    `/wallets/${props.ctx.wallet?.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`,
+    getQueryArgs(props.ctx),
+  ),
 );
 </script>
 <template>
-  <QueryTemplate
-    :team="team"
-    :wallet="wallet"
-    :token="token"
-    :response="response"
-    @submit="onSubmit"
-  >
+  <QueryTemplate @submit="onSubmit" :response="response">
     <div class="row">
       <div>Transaction refId</div>
-      <div><input v-model="refId"></div>
+      <div><input v-model="refId" /></div>
     </div>
   </QueryTemplate>
 </template>

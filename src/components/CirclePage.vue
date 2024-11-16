@@ -1,65 +1,54 @@
 <script setup lang="ts">
-import { W3SSdk } from '@circle-fin/w3s-pw-web-sdk'
-import { createClient } from '@supabase/supabase-js'
-import { onMounted, ref } from 'vue'
-import constants from '../constants'
-import Info from './InfoCard.vue'
-import { getAPI, postAPI } from '@/utils'
-import Query from './Query/QueryCard.vue'
-import { UserContext } from '@/types'
+import type { UserContext } from "@/types";
+import { getAPI } from "@/utils";
+import { createClient } from "@supabase/supabase-js";
+import { onMounted, ref } from "vue";
+import constants from "../constants";
+import Info from "./InfoCard.vue";
+import QueryCard from "./Query/QueryCard.vue";
 
-const getTeam = async (token) => {
-  const team = await getAPI(token, '/teams/default')
-  let hasWallet = false
-  if (!team?.uuid) {
-    console.error('Cannot fetch team.')
-  } else if (team?.wallets.length) {
-    hasWallet = true
-  }
-  return {
-    team,
-    hasWallet,
-  }
-}
 const getToken = async () => {
   try {
-    const supabase = createClient(constants.SUPABASE.URL, constants.SUPABASE.ANON_KEY)
+    const supabase = createClient(
+      constants.SUPABASE.URL,
+      constants.SUPABASE.ANON_KEY,
+    );
     const response = await supabase.auth.signInWithPassword({
       email: constants.SUPABASE.EMAIL,
       password: constants.SUPABASE.PASSWORD,
-    })
-    return response.data.session?.access_token
+    });
+    return response.data.session?.access_token;
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
 const userContext = ref<UserContext>({
   team: undefined,
   wallet: undefined,
   token: undefined,
-})
+});
 
 onMounted(async () => {
-  const token = await getToken()
-  if (!token) return
+  const token = await getToken();
+  if (!token) return;
   userContext.value = {
     ...userContext.value,
     token,
-  }
+  };
 
   // Fetch team
-  const team = await getAPI(token, `/teams/default`)
+  const team = await getAPI(`/teams/default`, { token });
   userContext.value = {
     ...userContext.value,
     team,
-  }
+  };
   if (team.wallets) {
-    const wallet = await getAPI(token, `/wallets/${team.wallets[0]}`)
+    const wallet = await getAPI(`/wallets/${team.wallets[0]}`, { token });
     userContext.value = {
       ...userContext.value,
       wallet,
-    }
+    };
   }
   /*
 
@@ -88,11 +77,12 @@ onMounted(async () => {
       getWallet(token, team);
     }
   });*/
-})
+});
 </script>
 
 <template>
-  <div class="column">
-    <Info :userContext="userContext" />
+  <div class="card-column">
+    <Info :ctx="userContext" />
+    <QueryCard :userContext="userContext" />
   </div>
 </template>

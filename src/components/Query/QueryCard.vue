@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import type { Wallet, Team } from "@/types";
+import type { UserContext } from "@/types";
 import { computed, ref, shallowRef } from "vue";
-import GetTransaction from "./GetTransaction.vue";
-import GetListings from "./GetListings.vue";
 import GetHoldings from "./GetHoldings.vue";
+import GetListings from "./GetListings.vue";
+import GetTransaction from "./GetTransaction.vue";
 
-const { token, team, wallet } = defineProps({
-  token: String,
-  team: Team,
-  wallet: Wallet,
-});
+const props = defineProps<{
+  userContext: UserContext;
+}>();
+
 const queries = shallowRef([
   {
     title: "Get transaction",
@@ -30,7 +29,7 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
 
 <template>
   <div class="card">
-    <div class="column">
+    <div class="card-column">
       <div class="pills">
         <button
           v-for="(query, index) in queries"
@@ -41,12 +40,7 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
           {{ query.title }}
         </button>
       </div>
-      <component
-        :is="activeQuery.component"
-        :team="team"
-        :wallet="wallet"
-        :token="token"
-      />
+      <component :is="activeQuery.component" :ctx="props.userContext" />
     </div>
   </div>
 </template>

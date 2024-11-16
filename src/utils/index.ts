@@ -1,36 +1,43 @@
-import constants from '@/constants'
-import type { UserContext } from '@/types'
-import { computed, toRef, type DefineProps, type PropType } from 'vue'
+import constants from "@/constants";
+import type { UserContext } from "@/types";
 
-export const cutString = (text?: string) => {
-  if (!text) return
-  if (text.length < 10) return text
-  return `${text.substring(0, 5)}...${text.substring(text.length - 5)}`
+interface QueryArgs {
+  token?: string;
+  method?: RequestInit["method"];
 }
+export const cutString = (text?: string) => {
+  if (!text) return;
+  if (text.length < 10) return text;
+  return `${text.substring(0, 5)}...${text.substring(text.length - 5)}`;
+};
 
-const fetchAPI = async (method: string, path: string, token: string) => {
+const fetchAPI = async (path: string, { method, token }: QueryArgs) => {
   return (
     await fetch(`${constants.CARBONMARK_API_URL}${path}`, {
       method,
       headers: {
-        Authorization: `Bearer ${token}`,
+        ...(token ? { Authorization: `Bearer ${token}` } : undefined),
       },
     })
-  ).json()
-}
+  ).json();
+};
 
-export const getAPI = async (token: string, path: string) => {
-  return fetchAPI('GET', path, token)
-}
+export const getAPI = async (path: string, queryArgs: QueryArgs) => {
+  return fetchAPI(path, {
+    ...queryArgs,
+    method: "GET",
+  });
+};
 
-export const postAPI = async (token: string, path: string) => {
-  return fetchAPI('POST', path, token)
-}
+export const postAPI = async (path: string, queryArgs: QueryArgs) => {
+  return fetchAPI(path, {
+    ...queryArgs,
+    method: "GET",
+  });
+};
 
-export const useUserContext = (props: { userContext: UserContext }) => {
+export const getQueryArgs = (ctx: UserContext) => {
   return {
-    token: computed(() => props.userContext.token),
-    wallet: computed(() => props.userContext.wallet),
-    team: computed(() => props.userContext.team),
-  }
-}
+    token: ctx.token,
+  };
+};

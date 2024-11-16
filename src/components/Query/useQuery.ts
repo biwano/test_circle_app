@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export function useQuery(func: () => Promise<any>) {
+export function useQuery<T>(func: () => Promise<T>) {
   const response = ref();
   const onSubmit = async () => {
     const data = await func();

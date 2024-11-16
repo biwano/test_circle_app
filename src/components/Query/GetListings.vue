@@ -1,27 +1,22 @@
 <script setup lang="ts">
-import { getAPI } from "@/utils";
-import QueryTemplate from "./QueryTemplate.vue";
+import type { UserContext } from "@/types";
+import { getAPI, getQueryArgs } from "@/utils";
+import QueryTemplate from "./QueryWrapper.vue";
 import { useQuery } from "./useQuery";
-import type { Wallet, Team } from "@/types";
 
-const { token, wallet } = defineProps({
-  token: String,
-  team: Team,
-  wallet: Wallet,
+const props = defineProps<{
+  ctx: UserContext;
+}>();
+
+const { response, onSubmit } = useQuery(() => {
+  return getAPI(
+    `/listings?sellerWallet=${props.ctx.wallet?.address}`,
+    getQueryArgs(props.ctx),
+  );
 });
-const { response, onSubmit } = useQuery(() =>
-  getAPI(token, `/listings?sellerWallet=${wallet.address}`)
-);
-
 </script>
 <template>
-  <QueryTemplate
-    :team="team"
-    :wallet="wallet"
-    :token="token"
-    :response="response"
-    @submit="onSubmit"
-  >
+  <QueryTemplate :ctx="props.ctx" @submit="onSubmit" :response="response">
     <div />
   </QueryTemplate>
 </template>

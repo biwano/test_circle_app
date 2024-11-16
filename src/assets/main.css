@@ -17,7 +17,7 @@ main {
   border: 1px solid;
 }
 
-.column {
+.item-column {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
@@ -26,21 +26,30 @@ main {
   overflow: none;
 }
 
+.card-column {
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  word-break: break-all;
+  gap: var(--card-gap);
+  overflow: none;
+}
+
 .row {
   display: flex;
   gap: 1rem;
 }
-.row>div {
+.row > div {
   flex: 1 1 0;
   padding: var(--item-padding);
   display: flex;
   align-items: center;
 }
-.row>div:first-child {
+.row > div:first-child {
   font-weight: bolder;
   background-color: var(--color-background-mute);
 }
-.row>div:nth-child(2) {
+.row > div:nth-child(2) {
   flex: 2 1 0;
   color: black;
 }
@@ -57,7 +66,7 @@ button {
   padding: var(--item-padding);
   font-size: 1rem;
   border: 0.1rem var(--color-border) solid;
-  border-radius: var(--border-radius); 
+  border-radius: var(--border-radius);
   transition: 0.5s;
 }
 button:hover {

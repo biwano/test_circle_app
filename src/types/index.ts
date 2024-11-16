@@ -10,7 +10,7 @@ export interface Wallet {
 }
 
 export interface UserContext {
-  wallet: Wallet
-  team: Team
-  token: string
+  wallet?: Wallet
+  team?: Team
+  token?: string
 }

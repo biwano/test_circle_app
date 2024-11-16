@@ -1,5 +1,5 @@
-<script setup>
-defineProps({ response: Object });
+<script setup lang="ts">
+defineProps<{ response?: string }>()
 </script>
 
 <template>
