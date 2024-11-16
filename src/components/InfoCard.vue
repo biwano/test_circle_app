@@ -2,7 +2,9 @@
 import type { UserContext } from "@/types/index";
 import { cutString } from "@/utils";
 import { computed } from "vue";
+import Card from "./shared/Card.vue";
 import Copiable from "./shared/CopiableComponent.vue";
+import ItemColumn from "./shared/ItemColumn.vue";
 
 const props = defineProps<{
   ctx: UserContext;
@@ -13,9 +15,8 @@ const circleURL = computed(() => {
 });
 </script>
 <template>
-  <div class="card">
-    <h1>User information</h1>
-    <div class="item-column">
+  <Card :title="'User information'">
+    <ItemColumn>
       <Copiable
         :label="'Token'"
         :value="props.ctx.token"
@@ -30,7 +31,7 @@ const circleURL = computed(() => {
         :value="circleURL"
         :value-label="circleURL"
       />
-    </div>
-  </div>
+    </ItemColumn>
+  </Card>
 </template>
 <style scoped></style>

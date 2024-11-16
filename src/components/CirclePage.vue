@@ -6,6 +6,7 @@ import { onMounted, ref } from "vue";
 import constants from "../constants";
 import Info from "./InfoCard.vue";
 import QueryCard from "./query/QueryCard.vue";
+import CardColumn from "./shared/CardColumn.vue";
 
 const getToken = async () => {
   try {
@@ -81,8 +82,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="card-column">
+  <CardColumn>
     <Info :ctx="userContext" />
     <QueryCard :userContext="userContext" />
-  </div>
+  </CardColumn>
 </template>

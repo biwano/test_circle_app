@@ -12,26 +12,11 @@ main {
   margin: 0 auto;
 }
 
-.card {
-  padding: 1rem;
-  border: 1px solid;
-}
-
-.item-column {
+.column {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   word-break: break-all;
-  gap: var(--item-gap);
-  overflow: none;
-}
-
-.card-column {
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  word-break: break-all;
-  gap: var(--card-gap);
   overflow: none;
 }
 

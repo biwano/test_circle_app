@@ -2,6 +2,9 @@
 import ButtonElement from "@/components/shared/ButtonElement.vue";
 import type { UserContext } from "@/types";
 import { computed, ref, shallowRef } from "vue";
+import Card from "../shared/Card.vue";
+import CardColumn from "../shared/CardColumn.vue";
+import ItemRow from "../shared/ItemRow.vue";
 import GetHoldings from "./GetHoldings.vue";
 import GetListings from "./GetListings.vue";
 import GetTransaction from "./GetTransaction.vue";
@@ -29,9 +32,9 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-column">
-      <div class="pills">
+  <Card title="">
+    <CardColumn>
+      <ItemRow>
         <ButtonElement
           v-for="(query, index) in queries"
           :key="index"
@@ -41,18 +44,10 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
         >
           {{ query.title }}
         </ButtonElement>
-      </div>
+      </ItemRow>
       <keep-alive
         ><component :is="activeQuery.component" :ctx="props.userContext"
       /></keep-alive>
-    </div>
-  </div>
+    </CardColumn>
+  </Card>
 </template>
-
-<style scoped>
-.pills {
-  display: flex;
-  flex-direction: row;
-  gap: var(--item-gap);
-}
-</style>

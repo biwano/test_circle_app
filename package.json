@@ -15,6 +15,7 @@
   "dependencies": {
     "@circle-fin/w3s-pw-web-sdk": "^1.1.6",
     "@supabase/supabase-js": "^2.46.1",
+    "json-viewer-ts": "^1.0.4",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"

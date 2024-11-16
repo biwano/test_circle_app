@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import CopyIcon from "./CopyIcon.vue";
+import InteractiveText from "./InteractiveText.vue";
 import LabelValue from "./LabelValue.vue";
 import Spinner from "./Spinner.vue";
 
@@ -24,7 +25,7 @@ function onCopy() {
     <div>{{ label }}</div>
     <div v-if="uiValueLabel" @click="onCopy" class="value">
       {{ uiValueLabel }}
-      <CopyIcon class="active-text" />
+      <InteractiveText><CopyIcon class="active-text" /></InteractiveText>
     </div>
     <div v-else><Spinner /></div>
   </LabelValue>

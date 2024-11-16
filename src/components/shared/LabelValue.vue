@@ -7,17 +7,17 @@
   display: flex;
   gap: 1rem;
 }
-.row >>> div {
+.row:deep(div) {
   flex: 1 1 0;
   padding: var(--item-padding);
   display: flex;
   align-items: center;
 }
-.row >>> div:first-child {
+.row:deep(div:first-child) {
   font-weight: bolder;
-  background-color: var(--color-surface);
+  background-color: var(--inactivesurface-background-color);
 }
-.row >>> div:nth-child(2) {
+.row:deep(div:nth-child(2)) {
   flex: 2 1 0;
   color: black;
 }

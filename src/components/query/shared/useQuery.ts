@@ -1,24 +1,25 @@
 import { ref } from "vue";
 
-export interface UseQuery {
-  response: string;
+export interface UseQuery<T> {
+  response?: T;
   loading: boolean;
   onSubmit: () => void;
 }
 
 export function useQuery<T>(func: () => Promise<T>) {
-  const useQuery = ref<UseQuery>({
-    response: "",
+  const useQuery = ref<UseQuery<T>>({
     loading: false,
     onSubmit: async () => {
       useQuery.value = {
         ...useQuery.value,
-        response: "",
+        response: undefined,
         loading: true,
       };
       try {
         const data = await func();
-        const response = JSON.stringify(data, null, 2);
+        const response = data;
+
+        //const response = JSON.stringify(data, null, 2);
         useQuery.value = {
           ...useQuery.value,
           response,

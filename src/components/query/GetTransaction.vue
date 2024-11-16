@@ -2,6 +2,7 @@
 import type { UserContext } from "@/types";
 import { getAPI, getQueryArgs } from "@/utils";
 import { ref } from "vue";
+import LabelValue from "../shared/LabelValue.vue";
 import QueryWrapper from "./shared/QueryWrapper.vue";
 import { useQuery } from "./shared/useQuery";
 
@@ -19,9 +20,9 @@ const query = useQuery(() =>
 </script>
 <template>
   <QueryWrapper @submit="query.onSubmit" :query="query">
-    <div class="row">
+    <LabelValue>
       <div>Transaction refId</div>
       <div><input v-model="refId" /></div>
-    </div>
+    </LabelValue>
   </QueryWrapper>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { activable, active } = defineProps<{
-  activable?: boolean;
+const { active } = defineProps<{
   active?: boolean;
 }>();
 defineEmits<{ click: string }>();
@@ -8,7 +7,6 @@ defineEmits<{ click: string }>();
 <template>
   <button
     :class="{
-      activable,
       active,
     }"
     @click="() => $emit('click')"
@@ -21,21 +19,23 @@ defineEmits<{ click: string }>();
 button {
   padding: var(--item-padding);
   font-size: 1rem;
-  background-color: var(--color-surface-activable-background);
-  color: var(--color-surface-activable-text);
-  border: var(--surface-activable-border);
   border-radius: var(--border-radius);
   transition: 0.5s;
+  border: var(--surface-border);
+  background-color: var(--interactivesurface-background-color);
+  box-shadow: var(--interactivesurface-shadow);
+  color: var(--interactivesurface-text-color);
 }
 
 button:hover {
-  border-color: var(--color-surface-active-background);
-  border: var(--surface-activable-border-hover);
+  background-color: var(--interactivesurface-hover-background-color);
+  box-shadow: var(--interactivesurface-hover-shadow);
+  color: var(--activesurface-hover-text-color);
 }
 
 button.active {
-  background-color: var(--color-surface-active-background);
-  border: var(--surface-active-border);
-  color: var(--color-surface-active-text);
+  background-color: var(--activesurface-background-color);
+  color: var(--activesurface-text-color);
+  box-shadow: var(--activesurface-hover-shadow);
 }
 </style>

@@ -1,19 +1,35 @@
+:root {
+  --w-surface: #fff;
+  --w-surface-inactive: #eee;
+  --w-surface-active: #eee;
+  --w-surface-activable: #fdf;
+  --w-surface-triggered: #fcf;
+
+  --w-line-active: #505;
+  --w-line-triggered: #f0f;
+
+  --w-shadow-active: 0.1rem 0.1rem 0.3rem var(--w-line-active);
+  --w-shadow-activable: 0.1rem 0.1rem 0.3rem var(--w-line-active);
+}
 /* semantic color variables for this project */
 :root {
-  --color-background: #fff;
-  --color-surface: #eee;
+  --inactivesurface-background-color: var(--w-surface-inactive);
 
-  --color-surface-activable-background: #fff;
-  --color-surface-activable-text: #505;
-  --surface-activable-border: 0.1rem, solid, #fff;
-  --surface-activable-border-hover: 0.1rem, solid, #505;
+  --interactivesurface-background-color: var(--w-surface-activable);
+  --interactivesurface-text-color: var(--w-line-active);
+  --interactivesurface-shadow: var(--w-shadow-activable);
+  --interactivesurface-hover-background-color: var(--w-surface-triggered);
+  --interactivesurface-hover-shadow: var(--w-shadow-active);
 
-  --color-surface-active-background: #fdf;
-  --color-surface-active-text: #505;
-  --color-active-text: #505;
-  --surface-active-border: 0.1rem, solid, #505;
+  --activesurface-background-color: var(--w-surface-active);
+  --activesurface-text-color: var(--w-line-active);
+  --activesurface-hover-shadow: var(--w-shadow-active);
+  --activesurface-hover-text-color: var(--w-line-active);
 
-  --item-gap: 0.2rem;
+  --interactivetext-color: var(--w-line-active);
+  --interactivetext-hover-color: var(--w-line-triggered);
+
+  --item-gap: 0.5rem;
   --item-padding: 0.2rem 0.5rem 0.2rem 0.5rem;
   --card-gap: 1rem;
   --card-padding: 0.5rem;
