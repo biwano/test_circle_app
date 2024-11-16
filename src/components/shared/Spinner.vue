@@ -11,8 +11,8 @@
   background-color: #fff;
   background: radial-gradient(
     ellipse at center,
-    #ff3d00 0%,
-    #ff3d00 14%,
+    var(--interactivesurface-text-color) 0%,
+    var(--interactivesurface-text-color) 14%,
     #fff 15%,
     #fff 100%
   );
@@ -26,7 +26,7 @@
   position: absolute;
   height: 16px;
   width: 4px;
-  background: #ff3d00;
+  background: var(--interactivesurface-text-color);
   top: 50%;
   left: 50%;
   transform: translateX(-50%) rotate(0deg);
