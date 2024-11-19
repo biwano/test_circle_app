@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import type { UserContext } from "@/types";
+import { useUserContextStore } from "@/stores/userContext";
 import { useApi } from "@/utils/useApi";
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import LabelValue from "../shared/LabelValue.vue";
 import QueryWrapper from "./shared/QueryWrapper.vue";
 import { useQuery } from "./shared/useQuery";
 
-const props = defineProps<{
-  ctx: UserContext;
-}>();
-
+const userContextStore = useUserContextStore();
+const { ctx } = storeToRefs(userContextStore);
 const { getAPI, getQueryArgs } = useApi();
 
 const refId = ref();
 const query = useQuery(() =>
   getAPI(
-    `/wallets/${props.ctx.wallet?.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`,
-    getQueryArgs(props.ctx),
+    `/wallets/${ctx.value.wallet?.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`,
+    getQueryArgs(ctx.value),
   ),
 );
 </script>

@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import type { UserContext } from "@/types";
+import { useUserContextStore } from "@/stores/userContext";
 import { useApi } from "@/utils/useApi";
+import { storeToRefs } from "pinia";
 import QueryWrapper from "./shared/QueryWrapper.vue";
 import { useQuery } from "./shared/useQuery";
 
-const props = defineProps<{
-  ctx: UserContext;
-}>();
-
 const { getAPI, getQueryArgs } = useApi();
+const userContextStore = useUserContextStore();
+const { ctx } = storeToRefs(userContextStore);
 
 const query = useQuery(() =>
   getAPI(
-    `/activities?walletAddress=${props.ctx.wallet?.address}`,
-    getQueryArgs(props.ctx),
+    `/activities?walletAddress=${ctx.value.wallet?.address}`,
+    getQueryArgs(ctx.value),
   ),
 );
 </script>

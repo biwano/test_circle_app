@@ -12,7 +12,9 @@ const userContextStore = useUserContextStore();
 const { ctx } = storeToRefs(userContextStore);
 
 const circleURL = computed(() => {
-  return `https://console.circle.com/wallets/user/users/test-${ctx?.team?.uuid}`;
+  return ctx.value.team
+    ? `https://console.circle.com/wallets/user/users/test-${ctx?.team?.uuid}`
+    : "";
 });
 </script>
 <template>
@@ -20,13 +22,13 @@ const circleURL = computed(() => {
     <ItemColumn>
       <Copiable
         :label="'Token'"
-        :value="ctx?.token"
+        :value="ctx.token"
         :value-label="cutString(ctx?.token)"
       />
-      <Copiable :label="'Team UUID'" :value="ctx?.team?.uuid" />
-      <Copiable :label="'Team name'" :value="ctx?.team?.name" />
-      <Copiable :label="'Wallet UUID'" :value="ctx?.wallet?.uuid" />
-      <Copiable :label="'Wallet address'" :value="ctx?.wallet?.address" />
+      <Copiable :label="'Team UUID'" :value="ctx.team?.uuid" />
+      <Copiable :label="'Team name'" :value="ctx.team?.name" />
+      <Copiable :label="'Wallet UUID'" :value="ctx.wallet?.uuid" />
+      <Copiable :label="'Wallet address'" :value="ctx.wallet?.address" />
       <Copiable
         :label="'Circle URL'"
         :value="circleURL"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ButtonElement from "@/components/shared/ButtonElement.vue";
-import type { UserContext } from "@/types";
 import { computed, ref, shallowRef } from "vue";
 import Card from "../shared/Card.vue";
 import CardColumn from "../shared/CardColumn.vue";
@@ -9,10 +8,6 @@ import GetActivities from "./GetActivities.vue";
 import GetHoldings from "./GetHoldings.vue";
 import GetListings from "./GetListings.vue";
 import GetTransaction from "./GetTransaction.vue";
-
-const props = defineProps<{
-  userContext: UserContext;
-}>();
 
 const queries = shallowRef([
   {
@@ -50,9 +45,7 @@ const activeQuery = computed(() => queries.value[activeQueryIndex.value]);
           {{ query.title }}
         </ButtonElement>
       </ItemRow>
-      <keep-alive
-        ><component :is="activeQuery.component" :ctx="props.userContext"
-      /></keep-alive>
+      <keep-alive><component :is="activeQuery.component" /></keep-alive>
     </CardColumn>
   </Card>
 </template>

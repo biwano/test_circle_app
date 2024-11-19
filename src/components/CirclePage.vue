@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useProfileStore } from "@/stores/profile";
 import { useUserContextStore } from "@/stores/userContext";
-import type { UserContext } from "@/types";
 import { useApi } from "@/utils/useApi";
 import { createClient } from "@supabase/supabase-js";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import Info from "./InfoCard.vue";
 import QueryCard from "./query/QueryCard.vue";
 import CardColumn from "./shared/CardColumn.vue";
@@ -30,13 +29,8 @@ const getToken = async () => {
   }
 };
 
-const userContext = ref<UserContext>({
-  team: undefined,
-  wallet: undefined,
-  token: undefined,
-});
-
 onMounted(async () => {
+  // Fetch Token
   const token = await getToken();
   if (!token) return;
   userContextStore.setToken(token);
@@ -45,16 +39,17 @@ onMounted(async () => {
   const team = await getAPI(`/teams/default`, { token });
   userContextStore.setTeam(team);
 
-  if (team.wallets) {
-    const wallet = await getAPI(`/wallets/${team.wallets[0]}`, { token });
-    userContextStore.setWallet(wallet);
-  }
+  if (!team.wallets) return;
+
+  // Fetch wallet
+  const wallet = await getAPI(`/wallets/${team.wallets[0]}`, { token });
+  userContextStore.setWallet(wallet);
 });
 </script>
 
 <template>
   <CardColumn>
     <Info />
-    <QueryCard :userContext="userContext" />
+    <QueryCard />
   </CardColumn>
 </template>
