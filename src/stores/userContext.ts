@@ -54,8 +54,8 @@ export const useUserContextStore = defineStore("userContext", () => {
     }
   };
 
-  async function loadContext(profile) {
-    const api = new Api(profile);
+  async function loadContext() {
+    const api = new Api(profileStore.profile);
     // Fetch Token
     const token = await getToken();
     if (!token) return;
@@ -72,10 +72,10 @@ export const useUserContextStore = defineStore("userContext", () => {
     setWallet(wallet);
   }
 
-  profileStore.$onAction(({ store }) => {
-    console.info("b");
-    loadContext(store.profile);
+  profileStore.$onAction(({ after }) => {
+    after(() => loadContext());
   });
+  loadContext();
 
   return { ctx, setToken, setWallet, setTeam, wallet, team, token };
 });
