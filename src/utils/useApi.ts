@@ -1,4 +1,4 @@
-import { useProfileStore } from "@/stores/counter";
+import { useProfileStore } from "@/stores/profile";
 import type { UserContext } from "@/types";
 import { computed } from "vue";
 
