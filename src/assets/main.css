@@ -20,7 +20,8 @@ main {
   overflow: none;
 }
 
-input {
+input,
+select {
   height: 2rem;
   padding: var(--item-padding);
   width: 100%;
@@ -30,11 +31,13 @@ input {
   outline: none;
   box-shadow: var(--interactivesurface-shadow);
 }
-input:hover {
+input:hover,
+select:hover {
   border: var(--input-hover-border);
   box-shadow: var(--interactivesurface-hover-shadow);
 }
-input:focus {
+input:focus,
+select:focus {
   box-shadow: var(--activesurface-hover-shadow);
 }
 

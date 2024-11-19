@@ -9,11 +9,6 @@ const EMPTY_CONTEXT: UserContext = {
 
 export const useUserContextStore = defineStore("userContext", {
   state: () => ({ ctx: EMPTY_CONTEXT }),
-  getters: {
-    ctx0(state) {
-      return state.ctx;
-    },
-  },
   actions: {
     setToken(token: string) {
       this.ctx = {

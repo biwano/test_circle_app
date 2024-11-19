@@ -1,11 +1,16 @@
-import config, { type Profile } from "@/config";
+import config from "@/config";
 import { defineStore } from "pinia";
 
 export const useProfileStore = defineStore("profile", {
-  state: () => ({ profile: config.PROFILES[0] }),
+  state: () => ({ profileIndex: 0 }),
   actions: {
-    setProfile(newProfile: Profile) {
-      this.profile = newProfile;
+    setProfileIndex(newProfileIndex: number) {
+      this.profileIndex = newProfileIndex;
+    },
+  },
+  getters: {
+    profile(state) {
+      return config.PROFILES[state.profileIndex];
     },
   },
 });

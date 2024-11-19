@@ -4,7 +4,8 @@ import { useUserContextStore } from "@/stores/userContext";
 import { useApi } from "@/utils/useApi";
 import { createClient } from "@supabase/supabase-js";
 import { onMounted } from "vue";
-import Info from "./InfoCard.vue";
+import InfoCard from "./InfoCard.vue";
+import ProfileCard from "./ProfileCard.vue";
 import QueryCard from "./query/QueryCard.vue";
 import CardColumn from "./shared/CardColumn.vue";
 
@@ -49,7 +50,8 @@ onMounted(async () => {
 
 <template>
   <CardColumn>
-    <Info />
+    <ProfileCard />
+    <InfoCard />
     <QueryCard />
   </CardColumn>
 </template>
