@@ -17,6 +17,7 @@ export const useUserContextStore = defineStore("userContext", () => {
   const team = computed(() => ctx.value.team);
   const token = computed(() => ctx.value.token);
   const profileStore = useProfileStore();
+  const api = computed(() => new Api(profileStore.profile));
 
   function setToken(token: string) {
     ctx.value = {
@@ -55,20 +56,21 @@ export const useUserContextStore = defineStore("userContext", () => {
   };
 
   async function loadContext() {
-    const api = new Api(profileStore.profile);
     // Fetch Token
     const token = await getToken();
     if (!token) return;
     setToken(token);
 
     // Fetch team
-    const team = await api.fetch(`/teams/default`, { token });
+    const team = await api.value.fetch(`/teams/default`, { token });
     setTeam(team);
 
     if (!team.wallets) return;
 
     // Fetch wallet
-    const wallet = await api.fetch(`/wallets/${team.wallets[0]}`, { token });
+    const wallet = await api.value.fetch(`/wallets/${team.wallets[0]}`, {
+      token,
+    });
     setWallet(wallet);
   }
 
@@ -77,5 +79,5 @@ export const useUserContextStore = defineStore("userContext", () => {
   });
   loadContext();
 
-  return { ctx, setToken, setWallet, setTeam, wallet, team, token };
+  return { ctx, setToken, setWallet, setTeam, wallet, team, token, api };
 });

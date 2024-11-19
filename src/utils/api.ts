@@ -1,4 +1,5 @@
 import type { Profile } from "@/config";
+import type { UserContext } from "@/types";
 
 interface QueryArgs {
   token?: string;
@@ -38,3 +39,9 @@ export class Api {
     });
   };
 }
+
+export const getQueryArgs = (ctx: UserContext) => {
+  return {
+    token: ctx.token,
+  };
+};

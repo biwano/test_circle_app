@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { useUserContextStore } from "@/stores/userContext";
-import { useApi } from "@/utils/useApi";
+import { getQueryArgs } from "@/utils/api";
 import { ref } from "vue";
 import LabelValue from "../shared/LabelValue.vue";
 import QueryWrapper from "./shared/QueryWrapper.vue";
 import { useQuery } from "./shared/useQuery";
 
 const ctx = useUserContextStore();
-const { getAPI, getQueryArgs } = useApi();
 
 const refId = ref();
 const query = useQuery(() =>
-  getAPI(
+  ctx.api.get(
     `/wallets/${ctx.wallet?.uuid}/transactions?refId=${refId.value}&eventsFilter=[{"eventNames":["ListingCreated"], "contractName": "carbonmark"}]`,
     getQueryArgs(ctx),
   ),
