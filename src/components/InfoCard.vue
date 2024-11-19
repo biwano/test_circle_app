@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { useUserContextStore } from "@/stores/userContext";
 import { cutString } from "@/utils";
-import { storeToRefs } from "pinia";
 import { computed } from "vue";
 import Card from "./shared/Card.vue";
 import Copiable from "./shared/CopiableComponent.vue";
 import ItemColumn from "./shared/ItemColumn.vue";
 import Link from "./shared/Link.vue";
 
-const userContextStore = useUserContextStore();
-const { ctx } = storeToRefs(userContextStore);
+const ctx = useUserContextStore();
 
 const circleURL = computed(() => {
-  return ctx.value.team
+  return ctx.team
     ? `https://console.circle.com/wallets/user/users/test-${ctx?.team?.uuid}`
     : "";
 });
