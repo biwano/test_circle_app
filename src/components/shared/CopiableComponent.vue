@@ -14,7 +14,6 @@ const slots = useSlots();
 const hasSlot = (name: string) => {
   return !!slots[name];
 };
-console.log(slots);
 
 const uiValueLabel = computed(() => {
   return valueLabel ?? value;

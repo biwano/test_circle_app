@@ -5,6 +5,7 @@ import { computed, ref, shallowRef } from "vue";
 import Card from "../shared/Card.vue";
 import CardColumn from "../shared/CardColumn.vue";
 import ItemRow from "../shared/ItemRow.vue";
+import GetActivities from "./GetActivities.vue";
 import GetHoldings from "./GetHoldings.vue";
 import GetListings from "./GetListings.vue";
 import GetTransaction from "./GetTransaction.vue";
@@ -25,6 +26,10 @@ const queries = shallowRef([
   {
     title: "List holdings",
     component: GetHoldings,
+  },
+  {
+    title: "List Activities",
+    component: GetActivities,
   },
 ]);
 const activeQueryIndex = ref(0);

@@ -12,11 +12,12 @@ const { getAPI, getQueryArgs } = useApi();
 
 const query = useQuery(() =>
   getAPI(
-    `/listings?sellerWallet=${props.ctx.wallet?.address}`,
+    `/activities?walletAddress=${props.ctx.wallet?.address}`,
     getQueryArgs(props.ctx),
   ),
 );
 </script>
+
 <template>
   <QueryWrapper @submit="query.onSubmit" :query="query" />
 </template>

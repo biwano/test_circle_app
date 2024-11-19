@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UserContext } from "@/types";
-import { getAPI, getQueryArgs } from "@/utils";
+import { useApi } from "@/utils/useApi";
 import { ref } from "vue";
 import LabelValue from "../shared/LabelValue.vue";
 import QueryWrapper from "./shared/QueryWrapper.vue";
@@ -9,6 +9,8 @@ import { useQuery } from "./shared/useQuery";
 const props = defineProps<{
   ctx: UserContext;
 }>();
+
+const { getAPI, getQueryArgs } = useApi();
 
 const refId = ref();
 const query = useQuery(() =>

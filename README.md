@@ -1,6 +1,4 @@
-# vue-project
-
-This template should help get you started developing with Vue 3 in Vite.
+# test-carbonmark-api
 
 ## Recommended IDE Setup
 
@@ -18,6 +16,7 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 
 ```sh
 npm install
+cp profiles.example.json profiles.json
 ```
 
 ### Compile and Hot-Reload for Development
