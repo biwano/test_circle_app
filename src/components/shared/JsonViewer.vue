@@ -17,13 +17,12 @@ watch(
 
     if (data === undefined) return;
 
-    const a = new JsonViewer({
+    new JsonViewer({
       container: target.value,
       data,
       theme: "light",
       expand: true,
     });
-    console.log(a);
   },
 );
 </script>
