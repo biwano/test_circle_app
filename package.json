@@ -15,8 +15,10 @@
   "dependencies": {
     "@circle-fin/w3s-pw-web-sdk": "^1.1.6",
     "@supabase/supabase-js": "^2.46.1",
+    "buffer": "^6.0.3",
     "json-viewer-ts": "^1.0.4",
     "pinia": "^2.2.6",
+    "process": "^0.11.10",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
@@ -35,6 +37,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "~5.6.3",
     "vite": "^5.4.10",
+    "vite-plugin-node-polyfills": "^0.28.0",
     "vite-plugin-vue-devtools": "^7.5.4",
     "vue-tsc": "^2.1.10"
   },

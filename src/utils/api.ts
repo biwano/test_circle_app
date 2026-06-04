@@ -4,6 +4,7 @@ import type { UserContext } from "@/types";
 interface QueryArgs {
   token?: string;
   method?: RequestInit["method"];
+  body?: Record<string, unknown>;
 }
 
 export class Api {
@@ -14,13 +15,18 @@ export class Api {
     this.base_url = this.profile.CARBONMARK_API_URL;
   }
 
-  async fetch(path: string, { method, token }: QueryArgs) {
+  async fetch(path: string, { method, token, body }: QueryArgs) {
+    const jsonBody =
+      method === "POST" ? JSON.stringify(body ?? {}) : undefined;
+
     return (
       await fetch(`${this.base_url}${path}`, {
         method,
         headers: {
           ...(token ? { Authorization: `Bearer ${token}` } : undefined),
+          ...(jsonBody ? { "Content-Type": "application/json" } : undefined),
         },
+        body: jsonBody,
       })
     ).json();
   }
@@ -35,7 +41,7 @@ export class Api {
   post = async (path: string, queryArgs: QueryArgs) => {
     return this.fetch(path, {
       ...queryArgs,
-      method: "GET",
+      method: "POST",
     });
   };
 }
