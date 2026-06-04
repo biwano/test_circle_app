@@ -15,7 +15,7 @@ const { createWallet, loading, error } = useCreateWallet();
 
 const circleURL = computed(() => {
   return ctx.team
-    ? `https://console.circle.com/wallets/user/users/test-${ctx?.team?.uuid}`
+    ? `https://console.circle.com/wallets/user/users/${ctx?.team?.uuid}`
     : "";
 });
 </script>
